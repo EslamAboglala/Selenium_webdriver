@@ -43,7 +43,7 @@ public class AlertsPage {
         driver.switchTo().alert().sendKeys(text);
     }
 
-    public String getResultText(){
+    public java.lang.Object getResultText(){
         return driver.findElement(resultText).getText();
     }
 

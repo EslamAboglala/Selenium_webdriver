@@ -24,14 +24,16 @@ import java.io.IOException;
 
 public class BaseTests {
 
-    private EventFiringWebDriver driver;
+//    private EventFiringWebDriver driver;
+    private WebDriver driver;
     protected HomePage homePage;
 
     @BeforeClass
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
-        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-        driver.register(new EventReporter());
+        driver = new ChromeDriver();
+//        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
+//
         //driver.manage().timeouts().pageLoadTimeout(5 , TimeUnit.SECONDS);
         //driver.manage().timeouts().implicitlyWait(30 , TimeUnit.SECONDS);
         goHome();
@@ -50,19 +52,19 @@ public class BaseTests {
         driver.quit();
     }
 
-    @AfterMethod
-    public void recordFailure(ITestResult result){
-        if(ITestResult.FAILURE == result.getStatus()){
-            var camera = ((TakesScreenshot)driver);
-            File screenshot = camera.getScreenshotAs(OutputType.FILE);
-            try{
-                Files.move(screenshot ,
-                        new File("resources/screenshots/" + result.getName() + ".png"));
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
+//    @AfterMethod
+//    public void recordFailure(ITestResult result){
+//        if(ITestResult.FAILURE == result.getStatus()){
+//            var camera = ((TakesScreenshot)driver);
+//            File screenshot = camera.getScreenshotAs(OutputType.FILE);
+//            try{
+//                Files.move(screenshot ,
+//                        new File("resources/screenshots/" + result.getName() + ".png"));
+//            }catch(IOException e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     public WindowManager getWindowManager(){
         return new WindowManager(driver);
@@ -85,12 +87,12 @@ public class BaseTests {
 
 }
 
-    /*
-    public static void main(String args[]){
-        BaseTests test = new BaseTests();
-        test.setUp();
 
-    }
+//    public static void main(String args[]){
+//        BaseTests test = new BaseTests();
+//        test.setUp();
+//
+//    }
 
 
 /*   till chapter 3
